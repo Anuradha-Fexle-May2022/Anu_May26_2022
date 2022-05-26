@@ -223,6 +223,11 @@
             <sortOrder>12</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
+            <actionName>Convert</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>16</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
             <actionName>ChangeOwnerOne</actionName>
             <actionType>StandardButton</actionType>
             <sortOrder>13</sortOrder>
@@ -271,11 +276,6 @@
             <actionName>EmailHighlightAction</actionName>
             <actionType>ProductivityAction</actionType>
             <sortOrder>23</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Convert</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>16</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <quickActionList>
