@@ -67,5 +67,9 @@
         <members>Year_of_Class__c-Year of Class Layout</members>
         <name>Layout</name>
     </types>   
+    <types>
+        <members>PatternPrintingOfLeftTriangle</members>
+        <name>ApexClass</name>
+    </types>
 <version>53.0</version>
 </Package>
