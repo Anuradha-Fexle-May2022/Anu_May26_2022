@@ -133,5 +133,10 @@
         <members>UseThisKeyword</members>
         <name>ApexClass</name>
     </types>
+    <types>
+        <members>InsertUpdatesObjectClass</members>
+        <members>MapWithCountryStateAndDistrict</members>
+        <name>ApexClass</name>
+    </types>
 <version>53.0</version>
 </Package>
