@@ -9,6 +9,7 @@ public with sharing class ExampleOfDML {
                     con.Description = 'New description';
                     // Add updated contact sObject to the list.
                     updatedList.add(con);
+                    update updatedList;
                     system.debug(con);
                 }
             }
