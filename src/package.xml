@@ -129,6 +129,8 @@
         <members>InsertAndUpdateRecords</members>
         <members>ParentChildRecords</members>
         <members>RelatedRecordsUsingExternalID</member>
+	   <members>AggregrateQueries</members>
+        <members>MapLogic</members>
 	   <name>ApexClass</name>
     </types>
 <version>53.0</version>
