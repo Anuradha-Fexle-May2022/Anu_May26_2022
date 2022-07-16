@@ -1,6 +1,6 @@
 public with sharing class MapLogic {
     Map<String,Map<String,List<String>>> mapOfCountry = new Map<String,Map<String,List<String>>>();
-    List<Country__c> con = [SELECT Country_JSON_Data__c FROM Country__c];
+   // List<Country__c> con = [SELECT Country_JSON_Data__c FROM Country__c WHERE Name = countryName LIMIT 1];
     Country cont = new Country();
 
     //Fill Country State District Map Dynamically 
@@ -117,6 +117,7 @@ public with sharing class MapLogic {
 
     public void CountryStateJSonGenerator(String countryName,Integer countryCode) 
     {
+        List<Country__c> con = [SELECT Country_JSON_Data__c FROM Country__c WHERE Name = : countryName LIMIT 1];
         try
         {
         cont.countryName = countryName;
@@ -145,22 +146,8 @@ public with sharing class MapLogic {
             st.districts.add(dis);
         }    
         }
-        }
-        catch (DmlException e)
-        {
-            system.debug('An unexpected error has occurred: ' + e.getMessage());
-        }
-    }
-    //Update Data on Country for serialize the JSON
-    public void updateCountry()
-    {
-        try
-        {
-        for(Country__c name :con)
-        {
-            name.Country_JSON_Data__c = JSON.serialize(cont);
-        }
-        update con;
+            con[0].Country_JSON_Data__c = JSON.serialize(cont);
+            update con[0];
         }
         catch (DmlException e)
         {
