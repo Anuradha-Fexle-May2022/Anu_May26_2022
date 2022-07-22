@@ -140,6 +140,7 @@
         <members>RelatedRecordsUsingExternalID</member>
 	   <members>AggregrateQueries</members>
         <members>MapLogic</members>
+        <members>AccountTriggerHandler</members>
 	   <name>ApexClass</name>
     </types>
     <types>
