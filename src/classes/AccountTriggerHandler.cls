@@ -1,9 +1,9 @@
 public with sharing class AccountTriggerHandler {
     //Create a method for beforeInsert Event and use condition for Saving account and Fixed account
-    public static void beforeInsert(List<Account> newList){
+    public static void insertAccountDetails(List<Account> newList){
+        if(newList.size() > 0)
+        {
         for(Account acc : newList){
-            if(newList.size() > 0)
-            {
             if(acc.Account_Details__c == 'Saving Account'){
                 acc.AccountNumber = 'SA-' + acc.AccountNumber;
             }
@@ -12,16 +12,20 @@ public with sharing class AccountTriggerHandler {
             }
         }
     }
-    }
+}
     //Create a method for afterInsert Event
-    public static void afterInsert(List<Account> newList){
+    public static void sendingEmails(List<Account> newList){
         //Create a master list to hold the emails we will send
         List<Messaging.SingleEmailMessage > listOfEmail = new List<Messaging.SingleEmailMessage >();         
         for(Account acc : newList)
-        {   
+        {
             //Create a new Email
-        	Messaging.SingleEmailMessage  email = new Messaging.SingleEmailMessage ();                         
-            email.setToAddresses(new List<String>{acc.Email_Address__c});
+        	Messaging.SingleEmailMessage  email = new Messaging.SingleEmailMessage (); 
+            List<String> toAddress = new List<String>{acc.Email_Address__c};
+            if(toAddress.size() > 0)
+            {
+            email.setToAddresses(toAddress);
+            }
             email.setSubject('Congratulation :' + acc.Name);
             String body = 'Dear, ' + '<br>' + acc.Name + '<br>' + ' Welcome to Axis Bank ' + '<br>' + 'Your Account Has Been Updated'+ '<br>' + 'If you have any query feel free to ask on 18006780067' + '<br>' +'Thanking You';
             email.setHtmlBody(body);
