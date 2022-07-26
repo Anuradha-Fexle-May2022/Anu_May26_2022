@@ -1,4 +1,4 @@
-//In this we make a class and their different methods using different events
+//Make a class and their different methods using different events
 public with sharing class AccountTriggerHandler {
     //Create a method for beforeInsert Event and use condition for Saving account and Fixed account
     public static void insertAccountDetails(List<Account> newList){
@@ -53,7 +53,7 @@ public with sharing class AccountTriggerHandler {
     }
 
     //Try Examples
-    //In this method we use Before Insert event and make a list of Account
+    //Using Before Insert event and make a list of Account
     public static void rating(List<Account> newList){
         try{
         //If Account Industry is not null and having value as 'Media' then populate Rating as 'Hot' otherwise 'cold'
@@ -72,7 +72,7 @@ public with sharing class AccountTriggerHandler {
         }
     }
     
-    //In this method we use After Insert event 
+    //Using After Insert event 
     public static void createdRelatedOpp(List<Account> newList){
         try{
         List<Opportunity> oppToBeInserted = new List<Opportunity>();
@@ -85,7 +85,7 @@ public with sharing class AccountTriggerHandler {
             opp.CloseDate = System.today();
             oppToBeInserted.add(opp);
         }
-        //In this we use insert DML opertaion 
+        //Using insert DML opertaion 
         if(!oppToBeInserted.isEmpty()){
             insert oppToBeInserted;
         }
@@ -96,7 +96,7 @@ public with sharing class AccountTriggerHandler {
     }
     }
     
-    //In this method we use Before Update event
+    //Using Before Update event
     public static void updatePhoneDescription(List<Account> newList, Map<Id,Account> oldMap){
         try{
         //If Account PHone is updated then put update message in description
@@ -112,7 +112,7 @@ public with sharing class AccountTriggerHandler {
         system.debug('An unexpected error has occurred: ' + e.getMessage());
     }
     }
-    //In this method we use After Update event
+    //Using After Update event
     public static void updateRelatedOppPhone(List<Account> newList, Map<Id,Account> oldMap){
         try{
         Map<Id, Account> accIdToAccountMap = new  Map<Id, Account>();
@@ -125,7 +125,7 @@ public with sharing class AccountTriggerHandler {
                 accIdToAccountMap.put(acc.id,acc);
             }
         }
-        //In this we can do SOQL query in this all the opportunity records will be queried where account id is in the keyset
+        //Using SOQL query in this all the opportunity records will be queried where account id is in the keyset
         for(Opportunity opp : [SELECT Id, Account_Phone__c, AccountId FROM Opportunity WHERE AccountId IN : accIdToAccountMap.keyset()]){
             //Through this opportunitity we can fetch account id 
             Opportunity oppor = new Opportunity();
