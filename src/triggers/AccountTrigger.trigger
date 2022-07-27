@@ -1,5 +1,5 @@
 //Make a before insert, after insert, before update, after update event trigger 
-trigger AccountTrigger on Account (before insert, after insert, before update, after update){
+trigger AccountTrigger on Account (before insert, after insert, before update, after update, before delete, after delete){
     //Performing Before insert trigger 
     if(Trigger.isInsert){
         if(Trigger.isBefore){
@@ -21,6 +21,16 @@ trigger AccountTrigger on Account (before insert, after insert, before update, a
         //Performing After update trigger
         if(Trigger.isAfter){
             AccountTriggerHandler.updateRelatedOppPhone(Trigger.new, Trigger.oldMap);
+        }
+    }
+    //Performing Before delete trigger
+    if(Trigger.isDelete){
+        if(Trigger.isBefore){
+            AccountTriggerHandler.checkStatus(Trigger.Old);
+        }
+        //Performing After delete trigger
+        if(Trigger.isAfter){
+            AccountTriggerHandler.deleteRelatedOpps(Trigger.oldMap);
         }
     }
 }
