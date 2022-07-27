@@ -6,7 +6,9 @@ trigger AccountTrigger on Account (before insert, after insert, before update, a
             AccountTriggerHandler.insertAccountDetails(Trigger.new);
             AccountTriggerHandler.rating(Trigger.new);
         }
-        //Performing After insert trigger
+    }
+    //Performing After insert trigger
+    if(Trigger.isInsert){
         if(Trigger.isAfter){
             AccountTriggerHandler.sendingEmails(Trigger.new);
             AccountTriggerHandler.createdRelatedOpp(Trigger.new);
@@ -18,7 +20,9 @@ trigger AccountTrigger on Account (before insert, after insert, before update, a
         if(Trigger.isBefore){
             AccountTriggerHandler.updatePhoneDescription(Trigger.new, Trigger.oldMap);
         }
-        //Performing After update trigger
+    }
+    //Performing After update trigger
+    if(Trigger.isUpdate){
         if(Trigger.isAfter){
             AccountTriggerHandler.updateRelatedOppPhone(Trigger.new, Trigger.oldMap);
         }
@@ -28,7 +32,9 @@ trigger AccountTrigger on Account (before insert, after insert, before update, a
         if(Trigger.isBefore){
             AccountTriggerHandler.checkStatus(Trigger.Old);
         }
-        //Performing After delete trigger
+    }
+    //Performing After delete trigger
+    if(Trigger.isDelete){
         if(Trigger.isAfter){
             AccountTriggerHandler.deleteRelatedOpps(Trigger.oldMap);
         }
