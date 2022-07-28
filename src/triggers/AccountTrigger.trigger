@@ -1,41 +1,28 @@
 //Make a before insert, after insert, before update, after update event trigger 
 trigger AccountTrigger on Account (before insert, after insert, before update, after update, before delete, after delete){
-    //Performing Before insert trigger 
-    if(Trigger.isInsert){
-        if(Trigger.isBefore){
+    //Here we are Performing Before trigger following events 
+    if(Trigger.isBefore){
+        if(Trigger.isInsert){
             AccountTriggerHandler.insertAccountDetails(Trigger.new);
             AccountTriggerHandler.rating(Trigger.new);
         }
-    }
-    //Performing After insert trigger
-    if(Trigger.isInsert){
-        if(Trigger.isAfter){
-            AccountTriggerHandler.sendingEmails(Trigger.new);
-            AccountTriggerHandler.createdRelatedOpp(Trigger.new);
-        }
-    }
-
-    //Performing Before update trigger
-    if(Trigger.isUpdate){
-        if(Trigger.isBefore){
+        if(Trigger.isUpdate){
             AccountTriggerHandler.updatePhoneDescription(Trigger.new, Trigger.oldMap);
         }
-    }
-    //Performing After update trigger
-    if(Trigger.isUpdate){
-        if(Trigger.isAfter){
-            AccountTriggerHandler.updateRelatedOppPhone(Trigger.new, Trigger.oldMap);
-        }
-    }
-    //Performing Before delete trigger
-    if(Trigger.isDelete){
-        if(Trigger.isBefore){
+        if(Trigger.isDelete){
             AccountTriggerHandler.checkStatus(Trigger.Old);
         }
     }
-    //Performing After delete trigger
-    if(Trigger.isDelete){
-        if(Trigger.isAfter){
+    //Here we are Performing After trigger following events
+    if(Trigger.isAfter){
+        if(Trigger.isInsert){
+            AccountTriggerHandler.sendingEmails(Trigger.new);
+            AccountTriggerHandler.createdRelatedOpp(Trigger.new);
+        }
+        if(Trigger.isUpdate){
+            AccountTriggerHandler.updateRelatedOppPhone(Trigger.new, Trigger.oldMap);
+        }
+        if(Trigger.isDelete){
             AccountTriggerHandler.deleteRelatedOpps(Trigger.oldMap);
         }
     }

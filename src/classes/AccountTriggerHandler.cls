@@ -125,6 +125,7 @@ public with sharing class AccountTriggerHandler {
             }
         }
         //Using SOQL query in this all the opportunity records will be queried where account id is in the keyset
+        if(accIdToAccountMap != null){
         for(Opportunity opp : [SELECT Id, Account_Phone__c, AccountId FROM Opportunity WHERE AccountId IN : accIdToAccountMap.keyset()]){
             //Through this opportunitity we can fetch account id 
             Opportunity oppor = new Opportunity();
@@ -134,6 +135,7 @@ public with sharing class AccountTriggerHandler {
                 oppor.Account_Phone__c = accIdToAccountMap.get(opp.AccountId).Phone;
                 oppToBeUpdated.add(oppor);
             }
+        }
         }
         //Check the condition if oppToBeUpdated(List) is not empty then we can apply Update DML operation
         if(!oppToBeUpdated.isEmpty()){
@@ -164,12 +166,14 @@ public with sharing class AccountTriggerHandler {
     //When account is deleted, delete the associated opportunity record
     public static void  deleteRelatedOpps(Map<Id,Account> mapIdAccount){
         try{
-            List<Opportunity> oppsToBeDeleted = new List<Opportunity>();
-            for(Opportunity opp : [SELECT Id FROM Opportunity WHERE AccountId IN : mapIdAccount.keySet()]){
-                oppsToBeDeleted.add(opp);
-            }
-            if(!oppsToBeDeleted.isEmpty()){
-                delete oppsToBeDeleted;
+            if(mapIdAccount.size() > 0){
+                List<Opportunity> oppsToBeDeleted = new List<Opportunity>();
+                for(Opportunity opp : [SELECT Id FROM Opportunity WHERE AccountId IN : mapIdAccount.keySet()]){
+                    oppsToBeDeleted.add(opp);
+                }
+                if(!oppsToBeDeleted.isEmpty()){
+                    delete oppsToBeDeleted;
+                }
             }
         }
         catch(DmlException e)
