@@ -6,14 +6,18 @@ public with sharing class DistrictTriggerHandler {
             List<id> addDistrict = new List<id>();
             //To fill State Id into addDistrict List into newList
             for (District__c district : newList){
-                addDistrict.add(district.State__c);
+                if(district.State__c != null){
+                    addDistrict.add(district.State__c);
+                }
             }
             system.debug('addDistrict :'+addDistrict);
             
             //To fill State Id into addDistrict List into OldList
             if(oldList != null){
                 for (District__c district : oldList){
-                    addDistrict.add(district.State__c);
+                    if(district.State__c != null){
+                        addDistrict.add(district.State__c);
+                    }
                 }
             }
            
