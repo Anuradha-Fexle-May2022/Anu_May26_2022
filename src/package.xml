@@ -141,6 +141,8 @@
 	   <members>AggregrateQueries</members>
         <members>MapLogic</members>
         <members>AccountTriggerHandler</members>
+	   <members>Account_TriggerHelper</members>
+        <members>ContactTriggerHandler</members>
   	   <name>ApexClass</name>
     </types>
     <types>
