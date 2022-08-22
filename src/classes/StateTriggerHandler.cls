@@ -3,6 +3,7 @@ public with sharing class StateTriggerHandler {
         try{
             //List to add country and Id on State 
             List<Country__c> addCountry = new List<Country__c>();
+<<<<<<< Updated upstream
             List<id> addStateId = new List<id>();
             //To fill Country Id into addState List into newList
             for (State__c state : newList){
@@ -16,6 +17,25 @@ public with sharing class StateTriggerHandler {
             }
             //querying Total number of State from Country
             for (Country__c ct : [SELECT Id, Name, Country_Code__c, Total_Number_of_States__c,(SELECT Id FROM States__r) from Country__c where id IN :addStateId]){
+=======
+            List<Id> addStateId = new List<Id>();
+            //To fill Country Id into addState List into newList
+            for(State__c state : newList){
+                if(state.Country__c != null){
+                    addStateId.add(state.Country__c);
+                }
+            }
+            //To fill Country Id into addState List into OldList
+            if(oldList != null){
+                for(State__c state : oldList){
+                    if(state.Country__c == null){
+                        addStateId.add(state.Country__c);
+                    }
+                }
+            }
+            //querying Total number of State from Country
+            for(Country__c ct : [SELECT Id, Name, Country_Code__c, Total_Number_of_States__c,(SELECT Id FROM States__r) from Country__c where id IN :addStateId]){
+>>>>>>> Stashed changes
                 ct.Total_Number_of_States__c = ct.States__r.size();
                 addCountry.add(ct);
                 updateJSON(ct.Name, Integer.ValueOf(ct.Country_Code__c));

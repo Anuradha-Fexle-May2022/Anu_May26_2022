@@ -3,9 +3,15 @@ public with sharing class DistrictTriggerHandler {
         try{
             //List to add state and Id on District 
             List<State__c> addState = new List<State__c>();
+<<<<<<< Updated upstream
             List<id> addDistrict = new List<id>();
             //To fill State Id into addDistrict List into newList
             for (District__c district : newList){
+=======
+            List<Id> addDistrict = new List<Id>();
+            //To fill State Id into addDistrict List into newList
+            for(District__c district : newList){
+>>>>>>> Stashed changes
                 if(district.State__c != null){
                     addDistrict.add(district.State__c);
                 }
@@ -15,7 +21,11 @@ public with sharing class DistrictTriggerHandler {
             //To fill State Id into addDistrict List into OldList
             if(oldList != null){
                 for (District__c district : oldList){
+<<<<<<< Updated upstream
                     if(district.State__c != null){
+=======
+                    if(district.State__c == null){
+>>>>>>> Stashed changes
                         addDistrict.add(district.State__c);
                     }
                 }
